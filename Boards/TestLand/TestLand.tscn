@@ -21,9 +21,17 @@ position = Vector2( 249.298, 312.528 )
 scale = Vector2( 5, 5 )
 
 [node name="Platform_Neutral_32x18" parent="Platforms" instance=ExtResource( 2 )]
-position = Vector2( 442.439, 476.26 )
+position = Vector2( 442.439, 475 )
 scale = Vector2( 5, 5 )
 
 [node name="Platform_Neutral_32x19" parent="Platforms" instance=ExtResource( 2 )]
-position = Vector2( 870.071, 406.77 )
+position = Vector2( 608.552, 475 )
+scale = Vector2( 5, 5 )
+
+[node name="Platform_Neutral_32x20" parent="Platforms" instance=ExtResource( 2 )]
+position = Vector2( 774.683, 475 )
+scale = Vector2( 5, 5 )
+
+[node name="Platform_Neutral_32x21" parent="Platforms" instance=ExtResource( 2 )]
+position = Vector2( 940.796, 475 )
 scale = Vector2( 5, 5 )
