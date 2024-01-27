@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Components/Environment/Platforms/Neutral/Platform_Neutral_16x16.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Components/Environment/Platforms/Neutral/Platform_Neutral_32x16.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Entities/PlayerCharacters/First/First_Character.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 1571.37, 10 )
+
+[node name="TestLand" type="Node"]
+
+[node name="First_Character" parent="." instance=ExtResource( 3 )]
+position = Vector2( 112.695, 58.0544 )
+scale = Vector2( 5, 5 )
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="Platform_Neutral_16x17" parent="Platforms" instance=ExtResource( 1 )]
+position = Vector2( 117.445, 143.257 )
+scale = Vector2( 5, 5 )
+
+[node name="Platform_Neutral_16x18" parent="Platforms" instance=ExtResource( 1 )]
+position = Vector2( 249.298, 312.528 )
+scale = Vector2( 5, 5 )
+
+[node name="Platform_Neutral_32x18" parent="Platforms" instance=ExtResource( 2 )]
+position = Vector2( 442.439, 476.26 )
+scale = Vector2( 5, 5 )
+
+[node name="Platform_Neutral_32x19" parent="Platforms" instance=ExtResource( 2 )]
+position = Vector2( 870.071, 406.77 )
+scale = Vector2( 5, 5 )
+
+[node name="FallBorder" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FallBorder"]
+position = Vector2( 464.386, 660.712 )
+shape = SubResource( 1 )
+
+[connection signal="body_entered" from="FallBorder" to="First_Character" method="_on_FallBorder_body_entered"]
