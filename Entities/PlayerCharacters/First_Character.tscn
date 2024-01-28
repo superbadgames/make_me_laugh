@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Entities/PlayerCharacters/First/character_01_frames.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Entities/PlayerCharacters/Player_Character.gd" type="Script" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 3.4375, 3.375 )
+
+[node name="Player_Character" type="KinematicBody2D" groups=[
+"players",
+]]
+scale = Vector2( 5, 5 )
+script = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -0.625 )
+frames = ExtResource( 1 )
+animation = "idle"
+playing = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+limit_smoothed = true
+smoothing_enabled = true
+smoothing_speed = 10.0
+offset_v = -1.0

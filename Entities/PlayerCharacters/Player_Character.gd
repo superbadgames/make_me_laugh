@@ -19,7 +19,7 @@ const walk_accel : float = 50.0
 const run_accel : float = 75.0
 const air_accel : float = 30.0
 # Y Values
-const jump_accel : float = 1_000.0
+const jump_accel : float = 800.0
 const initial_jump_force : float = 500.0
 # Rate of slow down, while on the ground
 const ground_decel : float = 75.0 
@@ -126,6 +126,7 @@ func apply_gravity():
 			move_velocity.y += GRAVITY
 		in_air = true
 		
+		# Not working at all as intended. Try again later
 		#if move_velocity.y > TERMINAL_VELOCITY:
 		#	move_velocity.y =  TERMINAL_VELOCITY
 	# on floor. For testing we can jump. This needs to change soon
