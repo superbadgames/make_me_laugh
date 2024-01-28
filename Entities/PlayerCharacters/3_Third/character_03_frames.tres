@@ -1,0 +1,25 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=2]
+
+[ext_resource path="res://Entities/PlayerCharacters/3_Third/character_3_jump02.png" type="Texture" id=1]
+[ext_resource path="res://Entities/PlayerCharacters/3_Third/character_3_walk01.png" type="Texture" id=2]
+[ext_resource path="res://Entities/PlayerCharacters/3_Third/character_3_idle01.png" type="Texture" id=3]
+[ext_resource path="res://Entities/PlayerCharacters/3_Third/character_3_walk02.png" type="Texture" id=4]
+[ext_resource path="res://Entities/PlayerCharacters/3_Third/character_3_idle02.png" type="Texture" id=5]
+
+[resource]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "idle",
+"speed": 0.25
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "walk",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "jump",
+"speed": 5.0
+} ]

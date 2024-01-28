@@ -25,33 +25,50 @@ const initial_jump_force : float = 500.0
 const ground_decel : float = 75.0 
 const air_decel : float = 50.0
 
-onready var animatedSprite = $AnimatedSprite
+export var PLAYER_NUMBER: int = 0
 
+onready var animatedSprite = $AnimatedSprite
+onready var respawn_timer = $RespawnTimer
+
+var my_turn : bool = false
+var player_string
+var alive: bool = true
 var move_velocity : Vector2 = Vector2.ZERO
 var restore_position : Vector2 = position
 var can_jump : bool = true
 var jumping : bool = false
 var in_air : bool
+var num_jumps : int = 3
 
 
 func _ready():
-	pass # Replace with function body.
+	print("on ready!")
+	assert(PLAYER_NUMBER != 0, "ERROR! No player value set!")
+	if PLAYER_NUMBER == 1:
+		player_string = "p1_"
+	elif PLAYER_NUMBER == 2:
+		player_string = "p2_"
+	elif PLAYER_NUMBER == 3 :
+		player_string = "p3_"
+	elif PLAYER_NUMBER == 4 :
+		player_string = "p4_"
 
 
 func _physics_process(delta):
-	move()
-	jump()
-	move_and_slide(move_velocity, UP)
-	apply_gravity()
-	check_for_fail()
+	if my_turn:
+		move()
+		jump()
+		move_and_slide(move_velocity, UP)
+		apply_gravity()
+		check_for_fail()
 
 
 # For now, I am going to hard code everything as if this is player 1. 
 # Later, I will need a way to determine which player you are. 1-4
 func move():
-	if Input.is_action_pressed("p1_right"):
+	if Input.is_action_pressed(player_string + "right"):
 		if not in_air:
-			if Input.is_action_pressed("p1_action"):
+			if Input.is_action_pressed(player_string + "action"):
 				move_velocity.x += run_accel
 				if move_velocity.x >= run_max_speed: 
 					move_velocity.x = run_max_speed
@@ -65,9 +82,9 @@ func move():
 			move_velocity.x += air_accel
 			if move_velocity.x > air_max_speed:
 				move_velocity.x = air_max_speed
-	elif Input.is_action_pressed("p1_left"):
+	elif Input.is_action_pressed(player_string + "left"):
 		if not in_air:
-			if Input.is_action_pressed("p1_action"):
+			if Input.is_action_pressed(player_string + "action"):
 				move_velocity.x -= run_accel
 				if move_velocity.x <= -run_max_speed: 
 					move_velocity.x = -run_max_speed
@@ -77,11 +94,6 @@ func move():
 					move_velocity.x = -walk_max_speed
 			animatedSprite.play("walk")
 			animatedSprite.flip_h = true
-		# This did not really work like I thought it would.
-		#elif in_air:
-		#	move_velocity.x -= air_accel
-		#	if move_velocity.x < air_max_speed:
-		#		move_velocity.x = -air_max_speed
 	else:
 		if not in_air:
 			if move_velocity.x > 0:
@@ -101,14 +113,14 @@ func move():
 
 
 func jump():
-	if Input.is_action_just_pressed("p1_jump"):
+	
+	if Input.is_action_just_pressed(player_string + "jump"):
 		if can_jump and not in_air:
 			can_jump = false
 			jumping = true
 			move_velocity.y = -initial_jump_force
 			animatedSprite.play("jump")
-	elif Input.is_action_pressed("p1_jump") and jumping:
-		print("about to add extra jump, move_velocity.y is", move_velocity.y)
+	elif Input.is_action_pressed(player_string + "jump") and jumping:
 		move_velocity.y -= jump_accel
 		if move_velocity.y <= -jump_max_speed:
 			jumping = false
@@ -121,28 +133,79 @@ func apply_gravity():
 	if not is_on_floor():
 		if jumping:
 			move_velocity.y += JUMP_GRAVITY
-			print("gravity for jumping appliked, move_velocity y is ", move_velocity.y)
 		else:
 			move_velocity.y += GRAVITY
 		in_air = true
-		
-		# Not working at all as intended. Try again later
-		#if move_velocity.y > TERMINAL_VELOCITY:
-		#	move_velocity.y =  TERMINAL_VELOCITY
 	# on floor. For testing we can jump. This needs to change soon
 	else:
-		if not can_jump:
-			print("hit floor, about to reset can_jump")
 		can_jump = true
 		in_air = false
-		#move_velocity.y = 0
 
 
 func check_for_fail():
-	if position.y >= FAIL_PLANE:
-		position = restore_position
+	if position.y >= FAIL_PLANE and alive:
+		respawn_timer.start()
+		alive = false
 
 
 func set_restore_position(restore_pos : Vector2):
 	restore_position = restore_pos
+
+
+func _on_RespawnTimer_timeout():
+	position = restore_position
+	alive = true
+
+
+func start_turn():
+	my_turn = true
+
+
+func end_turn():
+	my_turn = false
+
+# failed attempt to dynamically set the animated sprite. This is not going to work the way I had hoped.
+#func load_sprite_by_character_number():
+#	if CHARACTER_NUMBER == 1:
+#		animatedSprite.frames = SpriteFrames.new()
+#		# idle
+#		var idle01: StreamTexture = load("res://Entities/PlayerCharacters/1_First/character_1_idle01.png")
+#		var idle02: StreamTexture = load("res://Entities/PlayerCharacters/1_First/character_1_idle02.png")
+#
+#		animatedSprite.frames.add_frame("idle", idle01, 0)
+#		animatedSprite.frames.add_frame("idle", idle02, 1)
+#		animatedSprite.frames.set_animation_speed("idle", 0.25)
+#
+#		# walk
+#		var walk01: StreamTexture = load("res://Entities/PlayerCharacters/1_First/character_1_walk01.png")
+#		var walk02: StreamTexture = load("res://Entities/PlayerCharacters/1_First/character_1_walk02.png")
+#
+#		animatedSprite.frames.add_frame("walk", walk01, 0)
+#		animatedSprite.frames.add_frame("walk", walk02, 1)
+#
+#		# jump
+#		var jump: StreamTexture = load("res://Entities/PlayerCharacters/1_First/character_1_jump02.png")
+#
+#		animatedSprite.frames.add_frame("jump", jump, 0)
+#	elif CHARACTER_NUMBER == 2:
+#		animatedSprite.frames = SpriteFrames.new()
+#		# idle
+#		var idle01: StreamTexture = load("res://Entities/PlayerCharacters/2_Second/character_2_idle01.png")
+#		var idle02: StreamTexture = load("res://Entities/PlayerCharacters/2_Second/character_2_idle02.png")
+#
+#		animatedSprite.frames.add_frame("idle", idle01, 0)
+#		animatedSprite.frames.add_frame("idle", idle02, 1)
+#		animatedSprite.frames.set_animation_speed("idle", 0.25)
+#
+#		# walk
+#		var walk01: StreamTexture = load("res://Entities/PlayerCharacters/2_Second/character_2_walk01.png")
+#		var walk02: StreamTexture = load("res://Entities/PlayerCharacters/2_Second/character_2_walk02.png")
+#
+#		animatedSprite.frames.add_frame("walk", walk01, 0)
+#		animatedSprite.frames.add_frame("walk", walk02, 1)
+#
+#		# jump
+#		var jump: StreamTexture = load("res://Entities/PlayerCharacters/2_Second/character_2_jump02.png")
+#
+#		animatedSprite.frames.add_frame("jump", jump, 0)
 

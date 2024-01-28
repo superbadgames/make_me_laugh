@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/character_1_walk01.png-b3726fc5ef32a4404bd6da2782f29bc7.stex"
+path="res://.import/character_1_idle01.png-eefcd38737e2e3556b660ff03de24dce.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entities/PlayerCharacters/First/character_1_walk01.png"
-dest_files=[ "res://.import/character_1_walk01.png-b3726fc5ef32a4404bd6da2782f29bc7.stex" ]
+source_file="res://Entities/PlayerCharacters/1_First/character_1_idle01.png"
+dest_files=[ "res://.import/character_1_idle01.png-eefcd38737e2e3556b660ff03de24dce.stex" ]
 
 [params]
 
