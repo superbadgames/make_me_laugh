@@ -7,7 +7,7 @@
 [node name="TestLand" type="Node"]
 
 [node name="First_Character" parent="." instance=ExtResource( 3 )]
-position = Vector2( 112.695, 58.0544 )
+position = Vector2( 114.583, 40.1208 )
 scale = Vector2( 5, 5 )
 
 [node name="Platforms" type="Node2D" parent="."]

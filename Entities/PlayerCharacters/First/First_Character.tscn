@@ -5,7 +5,7 @@
 [ext_resource path="res://Entities/PlayerCharacters/First/character_1_walk02.png" type="Texture" id=3]
 [ext_resource path="res://Entities/PlayerCharacters/First/character_1_idle02.png" type="Texture" id=4]
 [ext_resource path="res://Entities/PlayerCharacters/Player_Character.gd" type="Script" id=5]
-[ext_resource path="res://Entities/PlayerCharacters/First/character_1_jump01.png" type="Texture" id=6]
+[ext_resource path="res://Entities/PlayerCharacters/First/character_1_jump02.png" type="Texture" id=7]
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 3.4375, 3.375 )
@@ -17,14 +17,9 @@ animations = [ {
 "name": "idle",
 "speed": 0.25
 }, {
-"frames": [ ExtResource( 6 ) ],
-"loop": false,
-"name": "jump_ready",
-"speed": 5.0
-}, {
-"frames": [  ],
+"frames": [ ExtResource( 7 ) ],
 "loop": true,
-"name": "jump_action",
+"name": "jump",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 1 ), ExtResource( 3 ) ],
@@ -44,6 +39,5 @@ shape = SubResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -0.625 )
 frames = SubResource( 2 )
-animation = "idle"
-frame = 1
+animation = "jump"
 playing = true
