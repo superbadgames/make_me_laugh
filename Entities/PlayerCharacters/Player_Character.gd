@@ -29,6 +29,8 @@ export var PLAYER_NUMBER: int = 0
 
 onready var animatedSprite = $AnimatedSprite
 onready var respawn_timer = $RespawnTimer
+onready var collision_shape = $CollisionShape2D
+onready var my_camera = $Camera2D
 
 var my_turn : bool = false
 var player_string
@@ -52,6 +54,9 @@ func _ready():
 		player_string = "p3_"
 	elif PLAYER_NUMBER == 4 :
 		player_string = "p4_"
+	visible = false
+	set_physics_process(false)
+	collision_shape.disabled = true
 
 
 func _physics_process(delta):
@@ -159,10 +164,17 @@ func _on_RespawnTimer_timeout():
 
 func start_turn():
 	my_turn = true
+	visible = true
+	set_physics_process(true)
+	collision_shape.disabled = false
+	my_camera.current = true
 
 
 func end_turn():
 	my_turn = false
+	set_physics_process(false)
+	collision_shape.disabled = true
+	my_camera.current = false
 
 # failed attempt to dynamically set the animated sprite. This is not going to work the way I had hoped.
 #func load_sprite_by_character_number():
