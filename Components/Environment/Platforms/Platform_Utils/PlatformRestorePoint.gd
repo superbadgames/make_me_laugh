@@ -4,7 +4,7 @@ onready var restore_position : Vector2
 
 func _ready():
 	restore_position = global_position
-	restore_position.y -= 8
+	restore_position.y -= 60 # Magic number found by testing
 
 
 func _on_Area2D_body_entered(body):

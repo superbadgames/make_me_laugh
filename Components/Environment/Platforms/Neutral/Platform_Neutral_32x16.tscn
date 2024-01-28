@@ -12,10 +12,12 @@ scale = Vector2( 5, 5 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
+[node name="RestorePoint" parent="." instance=ExtResource( 2 )]
+scale = Vector2( 2.496, 1 )
+
 [node name="platform_neutral" type="Sprite" parent="."]
 position = Vector2( 0.0775452, 0.123943 )
+scale = Vector2( 1, 1 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 32, 16 )
-
-[node name="RestorePoint" parent="." instance=ExtResource( 2 )]

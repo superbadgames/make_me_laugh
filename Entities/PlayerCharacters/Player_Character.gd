@@ -40,11 +40,13 @@ var restore_position : Vector2 = position
 var can_jump : bool = true
 var jumping : bool = false
 var in_air : bool
-var num_jumps : int = 3
+var num_jumps : int = 0
+var d6
+var rolled_this_turn : bool = false
+var total_score : int = 0
 
 
 func _ready():
-	print("on ready!")
 	assert(PLAYER_NUMBER != 0, "ERROR! No player value set!")
 	if PLAYER_NUMBER == 1:
 		player_string = "p1_"
@@ -54,22 +56,37 @@ func _ready():
 		player_string = "p3_"
 	elif PLAYER_NUMBER == 4 :
 		player_string = "p4_"
+	
+	assert(player_string != null && "ERROR! A Player Character has not been assigned a valid player number: ", PLAYER_NUMBER)
 	visible = false
 	set_physics_process(false)
 	collision_shape.disabled = true
 
+func _process(delta):
+	if Input.is_action_just_pressed("ui_cancel"):
+		get_tree().change_scene("res://Boards/StartScreen/StartScreen.tscn")
 
 func _physics_process(delta):
 	if my_turn:
-		move()
-		jump()
-		move_and_slide(move_velocity, UP)
-		apply_gravity()
-		check_for_fail()
+		if not rolled_this_turn:
+			d6.position = position
+			d6.position.y -= 200 # Magic test number
+			if Input.is_action_just_pressed(player_string + "jump"):
+				jump()
+				if d6 == null:
+					print("you've got problems bro")
+				else:
+					print("Rolling! ")
+					num_jumps = d6.roll()
+					rolled_this_turn = true
+		else:
+			move()
+			jump()
+			move_and_slide(move_velocity, UP)
+			apply_gravity()
+			check_for_fail()
 
 
-# For now, I am going to hard code everything as if this is player 1. 
-# Later, I will need a way to determine which player you are. 1-4
 func move():
 	if Input.is_action_pressed(player_string + "right"):
 		if not in_air:
@@ -109,6 +126,24 @@ func move():
 			if move_velocity.x <= ground_decel and move_velocity.x >= -ground_decel:
 				move_velocity.x = 0
 				animatedSprite.play("idle")
+				
+				# Check for end turn here, so that we can keep updating after our last jump
+				# TODO: Move this
+				# This does seem like a strange place to put this seemingily very important
+				# check, and it very much is.
+				# If this check is put in the process, or at the end of this block, then
+				# when the player runs out of turns, they'll stop moving mid air, and 
+				# wont enter the idle state while they wait for their next turn. 
+				# The real dependency here is to get the player into the idle state. 
+				#
+				# Consider maybe creating a function to call when num_jumps is at 0 that
+				# could also set the idle state and restore the position. In fact, maybe
+				# just the idle state needs to be set in the end_turn function. 
+				# This is working for now. 
+				if num_jumps <= 0 and rolled_this_turn:
+					print("My turn is over")
+					my_turn = false
+					rolled_this_turn = false
 		elif in_air:
 			if move_velocity.x > 0:
 				move_velocity.x -= air_decel
@@ -118,11 +153,13 @@ func move():
 
 
 func jump():
-	
 	if Input.is_action_just_pressed(player_string + "jump"):
 		if can_jump and not in_air:
 			can_jump = false
 			jumping = true
+			num_jumps -= 1
+			# don't let jumps go negative
+			if num_jumps < 0 : num_jumps = 0
 			move_velocity.y = -initial_jump_force
 			animatedSprite.play("jump")
 	elif Input.is_action_pressed(player_string + "jump") and jumping:
@@ -158,66 +195,50 @@ func set_restore_position(restore_pos : Vector2):
 
 
 func _on_RespawnTimer_timeout():
-	position = restore_position
-	alive = true
+	restore_position()
 
 
-func start_turn():
+func start_turn(di):
+	print("I got my turn, and I can roll a die now")
+	d6 = di
+	d6.toss()
 	my_turn = true
 	visible = true
 	set_physics_process(true)
 	collision_shape.disabled = false
 	my_camera.current = true
+	#alive = true
 
 
 func end_turn():
-	my_turn = false
+	restore_position()
 	set_physics_process(false)
 	collision_shape.disabled = true
-	my_camera.current = false
+	#alive = false
 
-# failed attempt to dynamically set the animated sprite. This is not going to work the way I had hoped.
-#func load_sprite_by_character_number():
-#	if CHARACTER_NUMBER == 1:
-#		animatedSprite.frames = SpriteFrames.new()
-#		# idle
-#		var idle01: StreamTexture = load("res://Entities/PlayerCharacters/1_First/character_1_idle01.png")
-#		var idle02: StreamTexture = load("res://Entities/PlayerCharacters/1_First/character_1_idle02.png")
-#
-#		animatedSprite.frames.add_frame("idle", idle01, 0)
-#		animatedSprite.frames.add_frame("idle", idle02, 1)
-#		animatedSprite.frames.set_animation_speed("idle", 0.25)
-#
-#		# walk
-#		var walk01: StreamTexture = load("res://Entities/PlayerCharacters/1_First/character_1_walk01.png")
-#		var walk02: StreamTexture = load("res://Entities/PlayerCharacters/1_First/character_1_walk02.png")
-#
-#		animatedSprite.frames.add_frame("walk", walk01, 0)
-#		animatedSprite.frames.add_frame("walk", walk02, 1)
-#
-#		# jump
-#		var jump: StreamTexture = load("res://Entities/PlayerCharacters/1_First/character_1_jump02.png")
-#
-#		animatedSprite.frames.add_frame("jump", jump, 0)
-#	elif CHARACTER_NUMBER == 2:
-#		animatedSprite.frames = SpriteFrames.new()
-#		# idle
-#		var idle01: StreamTexture = load("res://Entities/PlayerCharacters/2_Second/character_2_idle01.png")
-#		var idle02: StreamTexture = load("res://Entities/PlayerCharacters/2_Second/character_2_idle02.png")
-#
-#		animatedSprite.frames.add_frame("idle", idle01, 0)
-#		animatedSprite.frames.add_frame("idle", idle02, 1)
-#		animatedSprite.frames.set_animation_speed("idle", 0.25)
-#
-#		# walk
-#		var walk01: StreamTexture = load("res://Entities/PlayerCharacters/2_Second/character_2_walk01.png")
-#		var walk02: StreamTexture = load("res://Entities/PlayerCharacters/2_Second/character_2_walk02.png")
-#
-#		animatedSprite.frames.add_frame("walk", walk01, 0)
-#		animatedSprite.frames.add_frame("walk", walk02, 1)
-#
-#		# jump
-#		var jump: StreamTexture = load("res://Entities/PlayerCharacters/2_Second/character_2_jump02.png")
-#
-#		animatedSprite.frames.add_frame("jump", jump, 0)
 
+func is_my_turn():
+	return my_turn
+
+
+func restore_position():
+	print("restore to ", restore_position)
+	position = restore_position
+	alive = true
+
+func AddScore(points : int):
+	total_score += points
+	print("I got a point! My score is ", total_score)
+
+
+func MinusScore(points : int):
+	total_score -= points
+	print("I lost a point! My score is ", total_score)
+
+
+func get_score():
+	return total_score
+
+
+func goal():
+	print("You won a goal!")
