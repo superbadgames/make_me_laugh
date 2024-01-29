@@ -52,7 +52,7 @@ position = Vector2( 726.974, 108.353 )
 position = Vector2( 892.024, 249.464 )
 
 [node name="PlatformGoal_16x16" parent="Platforms" instance=ExtResource( 13 )]
-position = Vector2( 1122.44, 475.786 )
+position = Vector2( 1402.45, 702.06 )
 
 [node name="PlatformGoal_32x16" parent="Platforms" instance=ExtResource( 14 )]
 position = Vector2( 1325.48, -120.642 )
@@ -100,5 +100,24 @@ margin_left = 41.5305
 margin_top = 0.943878
 margin_right = 81.5305
 margin_bottom = 14.9439
+
+[node name="jumps_title" type="Label" parent="CanvasLayer/UI"]
+margin_left = -0.445
+margin_top = 14.5
+margin_right = 43.555
+margin_bottom = 28.5
+text = "jumps:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="jumps_value" type="Label" parent="CanvasLayer/UI"]
+margin_left = 46.923
+margin_top = 14.5
+margin_right = 86.923
+margin_bottom = 28.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="GameOverScreen" parent="CanvasLayer" instance=ExtResource( 15 )]

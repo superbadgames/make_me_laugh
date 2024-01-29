@@ -16,6 +16,9 @@ shape = SubResource( 1 )
 [node name="RestorePoint" parent="." instance=ExtResource( 1 )]
 
 [node name="PlatformGoalZone" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, -5.13 )
+scale = Vector2( 1, 1 )
 
 [node name="platform_gold" type="Sprite" parent="."]
+scale = Vector2( 1, 1 )
 texture = ExtResource( 2 )

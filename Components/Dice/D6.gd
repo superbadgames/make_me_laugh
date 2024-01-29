@@ -5,6 +5,7 @@ const max_range: int = 6
 var random = RandomNumberGenerator.new()
 
 onready var animation = $AnimatedSprite
+onready var timer = $Timer
 
 func _ready():
 	random.randomize()
@@ -12,7 +13,6 @@ func _ready():
 
 func roll():
 	var val = random.randi_range(min_range, max_range)
-	print("rolled a ", val, ", gonna play that animation now")
 	match val:
 		1:
 			animation.play("one")
@@ -26,7 +26,12 @@ func roll():
 			animation.play("five")
 		6:
 			animation.play("six")
+	timer.start()
 	return val
 
 func toss():
 	animation.play("roll")
+
+
+func _on_Timer_timeout():
+	visible = false

@@ -54,3 +54,9 @@ script = ExtResource( 7 )
 frames = SubResource( 1 )
 animation = "roll"
 frame = 2
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.5
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

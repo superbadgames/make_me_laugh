@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Components/Environment/Platforms/Red/platform_red.png" type="Texture" id=1]
+[ext_resource path="res://Components/Environment/Platforms/Platform_Utils/PlatformMinusZone.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Components/Environment/Platforms/Platform_Utils/RestorePoint.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 45.0569, 8.08207 )
+
+[node name="Minus_Score_Platform_96x16" type="KinematicBody2D"]
+scale = Vector2( 5, 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="RestorePoint" parent="." instance=ExtResource( 3 )]
+scale = Vector2( 7.664, 1 )
+
+[node name="Minus_Score_Zone" parent="." instance=ExtResource( 2 )]
+scale = Vector2( 5.44, 1 )
+
+[node name="platform_red" type="Sprite" parent="."]
+scale = Vector2( 0.93961, 1 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 96, 16 )

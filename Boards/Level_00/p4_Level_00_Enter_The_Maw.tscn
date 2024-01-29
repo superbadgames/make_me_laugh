@@ -1,0 +1,302 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Components/Environment/Platforms/Red/Minus_Score_Platform_96x16.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Components/Environment/Platforms/Red/Minus_Score_Platform_32x16.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Components/Dice/D6.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Components/Environment/Platforms/Gold/PlatformGoal16x16.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Components/Environment/Platforms/Red/Minus_Score_Platform_256x16.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Entities/PlayerCharacters/5_Fifth/Fifth_Character.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Components/Environment/Platforms/Blue/Plus_Score_Platform_32x16.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Components/Environment/Platforms/Red/Minus_Score_Platform_16x16.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Components/UI/GameOverScreen.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Components/Environment/Platforms/Blue/Plus_Score_Platform_16x16.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Entities/PlayerCharacters/3_Third/Third_Character.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Components/Environment/Platforms/Gold/PlatformGoal_32x16.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Boards/FourPlayerRoundManager.gd" type="Script" id=13]
+[ext_resource path="res://Entities/PlayerCharacters/2_Second/Second_Character.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Components/Environment/Platforms/Neutral/Platform_Neutral_32x16.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Components/Environment/Platforms/Neutral/Platform_Neutral_16x16.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Entities/PlayerCharacters/1_First/First_Character.tscn" type="PackedScene" id=17]
+
+[node name="01_The_Maw_P3" type="Node"]
+script = ExtResource( 13 )
+
+[node name="Pieces" type="Node2D" parent="."]
+
+[node name="Platform_Neutral_16x17" parent="Pieces" instance=ExtResource( 16 )]
+position = Vector2( 4630.93, 280.052 )
+
+[node name="Platform_Neutral_32x18" parent="Pieces" instance=ExtResource( 15 )]
+position = Vector2( 4770.67, 282.283 )
+
+[node name="Plus_Score_Platform_16x16" parent="Pieces" instance=ExtResource( 10 )]
+position = Vector2( 4630.18, 47.8518 )
+
+[node name="Plus_Score_Platform_32x16" parent="Pieces" instance=ExtResource( 7 )]
+position = Vector2( 4771.8, 47.9427 )
+
+[node name="Minus_Score_Platform_16x16" parent="Pieces" instance=ExtResource( 8 )]
+position = Vector2( 4629.52, 168.781 )
+
+[node name="Minus_Score_Platform_32x16" parent="Pieces" instance=ExtResource( 2 )]
+position = Vector2( 4760.63, 162.813 )
+
+[node name="PlatformGoal_16x16" parent="Pieces" instance=ExtResource( 4 )]
+position = Vector2( 4625.67, 401.109 )
+
+[node name="PlatformGoal_32x16" parent="Pieces" instance=ExtResource( 12 )]
+position = Vector2( 4756.73, 408.324 )
+
+[node name="Minus_Score_Platform_256x16" parent="Pieces" instance=ExtResource( 5 )]
+position = Vector2( 4824.67, 565.716 )
+
+[node name="Minus_Score_Platform_96x16" parent="Pieces" instance=ExtResource( 1 )]
+position = Vector2( 5137.53, 430.73 )
+
+[node name="Players" type="Node2D" parent="."]
+
+[node name="Player_1" parent="Players" instance=ExtResource( 17 )]
+position = Vector2( 752.096, 468 )
+PLAYER_NUMBER = 1
+
+[node name="Player_2" parent="Players" instance=ExtResource( 14 )]
+position = Vector2( 852.78, 468 )
+PLAYER_NUMBER = 3
+
+[node name="Player_3" parent="Players" instance=ExtResource( 6 )]
+position = Vector2( 821.524, 468 )
+PLAYER_NUMBER = 2
+
+[node name="Player_4" parent="Players" instance=ExtResource( 11 )]
+position = Vector2( 787.571, 468 )
+PLAYER_NUMBER = 4
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+scale = Vector2( 2, 2 )
+transform = Transform2D( 2, 0, 0, 2, 0, 0 )
+
+[node name="UI" type="Control" parent="CanvasLayer"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="score_title" type="Label" parent="CanvasLayer/UI"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Score:"
+
+[node name="score_value" type="Label" parent="CanvasLayer/UI"]
+margin_left = 39.321
+margin_right = 79.321
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="jumps_title" type="Label" parent="CanvasLayer/UI"]
+margin_left = -0.445
+margin_top = 14.5
+margin_right = 43.555
+margin_bottom = 28.5
+text = "jumps:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="jumps_value" type="Label" parent="CanvasLayer/UI"]
+margin_left = 46.923
+margin_top = 14.5
+margin_right = 86.923
+margin_bottom = 28.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameOverScreen" parent="CanvasLayer" instance=ExtResource( 9 )]
+margin_left = 80.7041
+margin_top = 43.6086
+margin_right = 232.704
+margin_bottom = 157.609
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="Minus_Score_Platform_96x17" parent="Platforms" instance=ExtResource( 1 )]
+position = Vector2( -2868.37, 1127.37 )
+
+[node name="Minus_Score_Platform_96x18" parent="Platforms" instance=ExtResource( 1 )]
+position = Vector2( -3456.67, 952.836 )
+
+[node name="Minus_Score_Platform_96x19" parent="Platforms" instance=ExtResource( 1 )]
+position = Vector2( -2857.19, 732.3 )
+
+[node name="Minus_Score_Platform_96x20" parent="Platforms" instance=ExtResource( 1 )]
+position = Vector2( -3564.15, 593.784 )
+
+[node name="Minus_Score_Platform_96x21" parent="Platforms" instance=ExtResource( 1 )]
+position = Vector2( -2844.08, 380.717 )
+
+[node name="Minus_Score_Platform_96x22" parent="Platforms" instance=ExtResource( 1 )]
+position = Vector2( -3752.2, 258.852 )
+
+[node name="Minus_Score_Platform_96x23" parent="Platforms" instance=ExtResource( 1 )]
+position = Vector2( -4364.18, 143.636 )
+
+[node name="Minus_Score_Platform_96x24" parent="Platforms" instance=ExtResource( 1 )]
+position = Vector2( -2358.84, 137.507 )
+
+[node name="Minus_Score_Platform_96x25" parent="Platforms" instance=ExtResource( 1 )]
+position = Vector2( -3956.85, -141.287 )
+
+[node name="Minus_Score_Platform_96x26" parent="Platforms" instance=ExtResource( 1 )]
+position = Vector2( -3722.3, -1000.34 )
+
+[node name="Plus_Score_Platform_16x17" parent="Platforms" instance=ExtResource( 10 )]
+position = Vector2( 593.862, 329.479 )
+
+[node name="Plus_Score_Platform_16x18" parent="Platforms" instance=ExtResource( 10 )]
+position = Vector2( -2.83502, 351.801 )
+
+[node name="Plus_Score_Platform_16x19" parent="Platforms" instance=ExtResource( 10 )]
+position = Vector2( -313.085, 294.962 )
+
+[node name="Plus_Score_Platform_16x20" parent="Platforms" instance=ExtResource( 10 )]
+position = Vector2( -563.353, 417.772 )
+scale = Vector2( 4.73393, 5.16451 )
+
+[node name="Plus_Score_Platform_16x21" parent="Platforms" instance=ExtResource( 10 )]
+position = Vector2( -875.142, 325.377 )
+
+[node name="Plus_Score_Platform_16x38" parent="Platforms" instance=ExtResource( 10 )]
+position = Vector2( -1080.21, 233.777 )
+
+[node name="Plus_Score_Platform_16x39" parent="Platforms" instance=ExtResource( 10 )]
+position = Vector2( -895.796, 71.795 )
+
+[node name="Plus_Score_Platform_16x40" parent="Platforms" instance=ExtResource( 10 )]
+position = Vector2( -1179.83, -6.03712 )
+
+[node name="Plus_Score_Platform_16x23" parent="Platforms" instance=ExtResource( 10 )]
+position = Vector2( -1831.65, 445.397 )
+
+[node name="Plus_Score_Platform_16x24" parent="Platforms" instance=ExtResource( 10 )]
+position = Vector2( -1510.73, 227.782 )
+
+[node name="Plus_Score_Platform_16x26" parent="Platforms" instance=ExtResource( 10 )]
+position = Vector2( -1748.39, -303.727 )
+
+[node name="Plus_Score_Platform_16x27" parent="Platforms" instance=ExtResource( 10 )]
+position = Vector2( -1974.76, -419.803 )
+
+[node name="Plus_Score_Platform_16x29" parent="Platforms" instance=ExtResource( 10 )]
+position = Vector2( -2009.22, -719.465 )
+
+[node name="Plus_Score_Platform_16x30" parent="Platforms" instance=ExtResource( 10 )]
+position = Vector2( -2246.71, -805.083 )
+
+[node name="Plus_Score_Platform_16x28" parent="Platforms" instance=ExtResource( 10 )]
+position = Vector2( -3726.63, -433.506 )
+
+[node name="Plus_Score_Platform_16x36" parent="Platforms" instance=ExtResource( 10 )]
+position = Vector2( -3545.1, -534.633 )
+
+[node name="Plus_Score_Platform_16x37" parent="Platforms" instance=ExtResource( 10 )]
+position = Vector2( -3374.84, -644.415 )
+
+[node name="Plus_Score_Platform_16x33" parent="Platforms" instance=ExtResource( 10 )]
+position = Vector2( -3194.15, -770.88 )
+
+[node name="Plus_Score_Platform_16x34" parent="Platforms" instance=ExtResource( 10 )]
+position = Vector2( -2989.47, -888.431 )
+
+[node name="Plus_Score_Platform_16x35" parent="Platforms" instance=ExtResource( 10 )]
+position = Vector2( -2800.39, -1038.48 )
+
+[node name="Plus_Score_Platform_16x31" parent="Platforms" instance=ExtResource( 10 )]
+position = Vector2( -2450.49, -920.497 )
+
+[node name="Plus_Score_Platform_16x41" parent="Platforms" instance=ExtResource( 10 )]
+position = Vector2( -2190.06, -1057.26 )
+
+[node name="Plus_Score_Platform_16x42" parent="Platforms" instance=ExtResource( 10 )]
+position = Vector2( -2398.17, -1221.37 )
+
+[node name="Plus_Score_Platform_16x43" parent="Platforms" instance=ExtResource( 10 )]
+position = Vector2( -2398.17, -1221.37 )
+
+[node name="Plus_Score_Platform_16x32" parent="Platforms" instance=ExtResource( 10 )]
+position = Vector2( -3337.72, -1187.32 )
+
+[node name="Plus_Score_Platform_16x25" parent="Platforms" instance=ExtResource( 10 )]
+position = Vector2( -1748.73, 67.6911 )
+
+[node name="Plus_Score_Platform_16x22" parent="Platforms" instance=ExtResource( 10 )]
+position = Vector2( -1841.37, 831.801 )
+
+[node name="Plus_Score_Platform_32x17" parent="Platforms" instance=ExtResource( 7 )]
+position = Vector2( 803.265, 529.781 )
+
+[node name="Plus_Score_Platform_32x18" parent="Platforms" instance=ExtResource( 7 )]
+position = Vector2( 290.306, 523.386 )
+
+[node name="Plus_Score_Platform_32x19" parent="Platforms" instance=ExtResource( 7 )]
+position = Vector2( -1191.77, 640 )
+
+[node name="Plus_Score_Platform_32x20" parent="Platforms" instance=ExtResource( 7 )]
+position = Vector2( -1507.18, 648.99 )
+
+[node name="Plus_Score_Platform_32x22" parent="Platforms" instance=ExtResource( 7 )]
+position = Vector2( -1492.61, -131.956 )
+
+[node name="Plus_Score_Platform_32x24" parent="Platforms" instance=ExtResource( 7 )]
+position = Vector2( -2250.75, -532.004 )
+
+[node name="Plus_Score_Platform_32x25" parent="Platforms" instance=ExtResource( 7 )]
+position = Vector2( -2644.53, -1256.82 )
+
+[node name="Plus_Score_Platform_32x26" parent="Platforms" instance=ExtResource( 7 )]
+position = Vector2( -2644.53, -1256.82 )
+
+[node name="Plus_Score_Platform_32x21" parent="Platforms" instance=ExtResource( 7 )]
+position = Vector2( -2222.54, 675.579 )
+
+[node name="Minus_Score_Platform_32x83" parent="Platforms" instance=ExtResource( 2 )]
+position = Vector2( -4470.5, -310.336 )
+
+[node name="Minus_Score_Platform_32x84" parent="Platforms" instance=ExtResource( 2 )]
+position = Vector2( -4117.66, -518.381 )
+
+[node name="Minus_Score_Platform_32x85" parent="Platforms" instance=ExtResource( 2 )]
+position = Vector2( -4529.1, -664.672 )
+
+[node name="Minus_Score_Platform_32x86" parent="Platforms" instance=ExtResource( 2 )]
+position = Vector2( -4163.22, -828.816 )
+
+[node name="Minus_Score_Platform_32x87" parent="Platforms" instance=ExtResource( 2 )]
+position = Vector2( -4590.85, -982.051 )
+
+[node name="Minus_Score_Platform_32x88" parent="Platforms" instance=ExtResource( 2 )]
+position = Vector2( -4232.71, -1106.78 )
+
+[node name="PlatformGoal_32x17" parent="Platforms" instance=ExtResource( 12 )]
+position = Vector2( -3075.05, -1196.16 )
+
+[node name="PlatformGoal_16x18" parent="Platforms" instance=ExtResource( 4 )]
+position = Vector2( 2425.26, 2850.82 )
+
+[node name="Minus_Score_Platform_256x17" parent="Platforms" instance=ExtResource( 5 )]
+position = Vector2( -345.385, 771.289 )
+
+[node name="Minus_Score_Platform_256x20" parent="Platforms" instance=ExtResource( 5 )]
+position = Vector2( 874.741, 933.021 )
+
+[node name="Minus_Score_Platform_256x18" parent="Platforms" instance=ExtResource( 5 )]
+position = Vector2( -1883.73, 1260.76 )
+
+[node name="Minus_Score_Platform_256x19" parent="Platforms" instance=ExtResource( 5 )]
+position = Vector2( -1883.73, 1260.76 )
+
+[node name="D6" parent="." instance=ExtResource( 3 )]
+position = Vector2( 4683.46, -112.353 )
+scale = Vector2( 4.9583, 5 )

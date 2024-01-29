@@ -4,14 +4,14 @@ const UP : Vector2 = Vector2.UP
 const GRAVITY : float = 200.0
 const JUMP_GRAVITY : float = 50.0
 const TERMINAL_VELOCITY : float = 1_000.0
-const FAIL_PLANE : float = 1_000.0
+const FAIL_PLANE : float = 5_000.0
 # Max speed the velocity can reach from acceleration
 # X values
 const walk_max_speed : float = 250.0
 const run_max_speed : float = 600.0
 const air_max_speed : float = 1_000.0
 # Y value
-const jump_max_speed : float = 2_000.0
+const jump_max_speed : float = 2_500.0
 # These are the acceleration values. These are appliec to the velocity each fram
 # to move the player
 # X values
@@ -74,6 +74,7 @@ func _physics_process(delta):
 		if not rolled_this_turn:
 			d6.position = position
 			d6.position.y -= 200 # Magic test number
+			d6.visible = true
 			if Input.is_action_just_pressed(player_string + "jump"):
 				jump()
 				if d6 == null:
@@ -167,7 +168,8 @@ func jump():
 		move_velocity.y -= jump_accel
 		if move_velocity.y <= -jump_max_speed:
 			jumping = false
-	elif Input.is_action_just_released(player_string + "jump"):
+	
+	if Input.is_action_just_released(player_string + "jump"):
 		jumping = false
 
 
@@ -240,6 +242,9 @@ func get_score():
 func has_won():
 	return win
 
+
+func jumps_remaining():
+	return num_jumps
 
 func goal():
 	total_score += 1000

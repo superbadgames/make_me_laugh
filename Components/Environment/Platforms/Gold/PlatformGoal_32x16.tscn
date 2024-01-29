@@ -17,6 +17,7 @@ shape = SubResource( 1 )
 scale = Vector2( 2.608, 1 )
 
 [node name="PlatformGoalZone" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, -5.129 )
 scale = Vector2( 2.04, 1 )
 
 [node name="platform_gold" type="Sprite" parent="."]

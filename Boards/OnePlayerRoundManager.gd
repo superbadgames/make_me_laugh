@@ -6,6 +6,7 @@ export var num_players : int = 3
 onready var first_player = $Players/Player_1
 onready var d6 = $D6
 onready var score_value = $CanvasLayer/UI/score_value
+onready var jumps_value = $CanvasLayer/UI/jumps_value
 onready var game_over_screen = $CanvasLayer/GameOverScreen
 
 var current_player_turn : int = 1
@@ -23,6 +24,7 @@ func _process(delta):
 		pass
 	if current_player_turn == 1:
 		score_value.text = str(first_player.get_score())
+		jumps_value.text = str(first_player.jumps_remaining())
 		
 		if first_player.has_won():
 			game_over_screen.show()

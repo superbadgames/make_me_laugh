@@ -21,32 +21,85 @@ align = 1
 valign = 1
 
 [node name="TestLand_1P" type="Button" parent="."]
-margin_left = 46.0209
-margin_top = 156.022
-margin_right = 183.021
-margin_bottom = 176.022
+margin_left = 45.0
+margin_top = 155.0
+margin_right = 182.0
+margin_bottom = 175.0
 text = "Test Land - 1 Player"
 
 [node name="TestLand_2P" type="Button" parent="."]
-margin_left = 48.2659
-margin_top = 191.941
-margin_right = 185.266
-margin_bottom = 211.941
+margin_left = 45.0
+margin_top = 185.0
+margin_right = 182.0
+margin_bottom = 205.0
 text = "Test Land - 2 Player"
 
 [node name="TestLand_3P" type="Button" parent="."]
-margin_left = 47.1434
-margin_top = 236.84
-margin_right = 184.143
-margin_bottom = 256.84
+margin_left = 45.0
+margin_top = 215.0
+margin_right = 182.0
+margin_bottom = 235.0
 text = "Test Land - 3 Player"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TestLand_4P" type="Button" parent="."]
-margin_left = 49.3883
-margin_top = 271.636
-margin_right = 186.388
-margin_bottom = 291.636
+margin_left = 45.0
+margin_top = 245.0
+margin_right = 182.0
+margin_bottom = 265.0
 text = "Test Land - 4 Player"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="."]
+margin_left = 479.458
+margin_top = 557.37
+margin_right = 519.458
+margin_bottom = 577.37
+text = "Quit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level_01_p1" type="Button" parent="."]
+margin_left = 245.0
+margin_top = 155.0
+margin_right = 333.0
+margin_bottom = 175.0
+text = "01 The Maw - 1 Player"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level_01_p2" type="Button" parent="."]
+margin_left = 245.0
+margin_top = 185.0
+margin_right = 397.0
+margin_bottom = 205.0
+text = "01 The Maw - 2 Player"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level_01_p3" type="Button" parent="."]
+margin_left = 245.0
+margin_top = 215.0
+margin_right = 397.0
+margin_bottom = 235.0
+text = "01 The Maw - 3 Player"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level_01_p4" type="Button" parent="."]
+margin_left = 245.0
+margin_top = 245.0
+margin_right = 397.0
+margin_bottom = 265.0
+text = "01 The Maw - 4 Player"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -55,3 +108,8 @@ __meta__ = {
 [connection signal="pressed" from="TestLand_2P" to="." method="_on_TestLand_2P_pressed"]
 [connection signal="pressed" from="TestLand_3P" to="." method="_on_TestLand_3P_pressed"]
 [connection signal="pressed" from="TestLand_4P" to="." method="_on_TestLand_4P_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]
+[connection signal="pressed" from="Level_01_p1" to="." method="_on_Level_01_p1_pressed"]
+[connection signal="pressed" from="Level_01_p2" to="." method="_on_Level_01_p2_pressed"]
+[connection signal="pressed" from="Level_01_p3" to="." method="_on_Level_01_p3_pressed"]
+[connection signal="pressed" from="Level_01_p4" to="." method="_on_Level_01_p4_pressed"]
