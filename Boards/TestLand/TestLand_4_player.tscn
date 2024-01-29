@@ -1,0 +1,104 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Components/Environment/Platforms/Red/Minus_Score_Platform_32x16.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Components/Dice/D6.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Entities/PlayerCharacters/5_Fifth/Fifth_Character.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Components/Environment/Platforms/Blue/Plus_Score_Platform_32x16.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Components/Environment/Platforms/Red/Minus_Score_Platform_16x16.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Components/Environment/Platforms/Blue/Plus_Score_Platform_16x16.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Entities/PlayerCharacters/3_Third/Third_Character.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Boards/FourPlayerRoundManager.gd" type="Script" id=8]
+[ext_resource path="res://Entities/PlayerCharacters/2_Second/Second_Character.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Components/Environment/Platforms/Neutral/Platform_Neutral_32x16.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Components/Environment/Platforms/Neutral/Platform_Neutral_16x16.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Entities/PlayerCharacters/1_First/First_Character.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Components/UI/GameOverScreen.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Components/Environment/Platforms/Gold/PlatformGoal16x16.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Components/Environment/Platforms/Gold/PlatformGoal_32x16.tscn" type="PackedScene" id=15]
+
+[node name="TestLand_4P" type="Node"]
+script = ExtResource( 8 )
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="Platform_Neutral_16x17" parent="Platforms" instance=ExtResource( 11 )]
+position = Vector2( 117.445, 143.257 )
+
+[node name="Platform_Neutral_16x18" parent="Platforms" instance=ExtResource( 11 )]
+position = Vector2( 249.298, 312.528 )
+
+[node name="Platform_Neutral_32x18" parent="Platforms" instance=ExtResource( 10 )]
+position = Vector2( 442.439, 475 )
+
+[node name="Platform_Neutral_32x19" parent="Platforms" instance=ExtResource( 10 )]
+position = Vector2( 608.552, 475 )
+
+[node name="Platform_Neutral_32x20" parent="Platforms" instance=ExtResource( 10 )]
+position = Vector2( 774.683, 475 )
+
+[node name="Platform_Neutral_32x21" parent="Platforms" instance=ExtResource( 10 )]
+position = Vector2( 940.796, 475 )
+
+[node name="Plus_Score_Platform_16x16" parent="Platforms" instance=ExtResource( 6 )]
+position = Vector2( 466, 184 )
+
+[node name="Plus_Score_Platform_32x16" parent="Platforms" instance=ExtResource( 4 )]
+position = Vector2( 1009.26, 31.3559 )
+
+[node name="Minus_Score_Platform_16x16" parent="Platforms" instance=ExtResource( 5 )]
+position = Vector2( 726.974, 108.353 )
+
+[node name="Minus_Score_Platform_32x16" parent="Platforms" instance=ExtResource( 1 )]
+position = Vector2( 892.024, 249.464 )
+
+[node name="PlatformGoal_32x16" parent="Platforms" instance=ExtResource( 15 )]
+position = Vector2( 1330.84, -28.0316 )
+
+[node name="PlatformGoal_16x16" parent="Platforms" instance=ExtResource( 14 )]
+position = Vector2( 1171.99, 477.873 )
+
+[node name="Players" type="Node2D" parent="."]
+
+[node name="Player_1" parent="Players" instance=ExtResource( 12 )]
+position = Vector2( 117.445, 40.121 )
+PLAYER_NUMBER = 1
+
+[node name="Player_3" parent="Players" instance=ExtResource( 3 )]
+position = Vector2( 608.807, 353.176 )
+PLAYER_NUMBER = 2
+
+[node name="Player_4" parent="Players" instance=ExtResource( 7 )]
+position = Vector2( 250.923, 221.192 )
+PLAYER_NUMBER = 4
+
+[node name="Player_2" parent="Players" instance=ExtResource( 9 )]
+position = Vector2( 911.696, 353.733 )
+PLAYER_NUMBER = 3
+
+[node name="D6" parent="." instance=ExtResource( 2 )]
+position = Vector2( -80.6512, 449.926 )
+scale = Vector2( 4.9583, 5 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+scale = Vector2( 2, 2 )
+transform = Transform2D( 2, 0, 0, 2, 0, 0 )
+
+[node name="UI" type="Control" parent="CanvasLayer"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="score_title" type="Label" parent="CanvasLayer/UI"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Score:"
+
+[node name="score_value" type="Label" parent="CanvasLayer/UI"]
+margin_left = 41.5305
+margin_top = 0.943878
+margin_right = 81.5305
+margin_bottom = 14.9439
+
+[node name="GameOverScreen" parent="CanvasLayer" instance=ExtResource( 13 )]

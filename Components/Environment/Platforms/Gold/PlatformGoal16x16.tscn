@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Components/Environment/Platforms/Platform_Utils/RestorePoint.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Components/Environment/Platforms/Gold/platform_gold.png" type="Texture" id=2]
+[ext_resource path="res://Components/Environment/Platforms/Platform_Utils/PlatformGoalZone.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8.2433, 8.04308 )
+
+[node name="PlatformGoal_16x16" type="KinematicBody2D"]
+scale = Vector2( 5, 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="RestorePoint" parent="." instance=ExtResource( 1 )]
+
+[node name="PlatformGoalZone" parent="." instance=ExtResource( 3 )]
+
+[node name="platform_gold" type="Sprite" parent="."]
+texture = ExtResource( 2 )

@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Boards/StartScreen/StartScreen.gd" type="Script" id=1]
+
+[node name="StartScreen" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 365.688
+margin_top = 72.2059
+margin_right = 459.688
+margin_bottom = 86.2059
+rect_scale = Vector2( 2.08, 2.24 )
+text = "Platform Party!"
+align = 1
+valign = 1
+
+[node name="TestLand_1P" type="Button" parent="."]
+margin_left = 46.0209
+margin_top = 156.022
+margin_right = 183.021
+margin_bottom = 176.022
+text = "Test Land - 1 Player"
+
+[node name="TestLand_2P" type="Button" parent="."]
+margin_left = 48.2659
+margin_top = 191.941
+margin_right = 185.266
+margin_bottom = 211.941
+text = "Test Land - 2 Player"
+
+[node name="TestLand_3P" type="Button" parent="."]
+margin_left = 47.1434
+margin_top = 236.84
+margin_right = 184.143
+margin_bottom = 256.84
+text = "Test Land - 3 Player"
+
+[node name="TestLand_4P" type="Button" parent="."]
+margin_left = 49.3883
+margin_top = 271.636
+margin_right = 186.388
+margin_bottom = 291.636
+text = "Test Land - 4 Player"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="TestLand_1P" to="." method="_on_TestLand_1P_pressed"]
+[connection signal="pressed" from="TestLand_2P" to="." method="_on_TestLand_2P_pressed"]
+[connection signal="pressed" from="TestLand_3P" to="." method="_on_TestLand_3P_pressed"]
+[connection signal="pressed" from="TestLand_4P" to="." method="_on_TestLand_4P_pressed"]

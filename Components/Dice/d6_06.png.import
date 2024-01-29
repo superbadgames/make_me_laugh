@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/character_1_landing02.png-d397f80be4d4e883e926b1adb57007c0.stex"
+path="res://.import/d6_06.png-27c1623da84bf8ddf35700ab8059f9ae.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entities/PlayerCharacters/1_First/character_1_landing02.png"
-dest_files=[ "res://.import/character_1_landing02.png-d397f80be4d4e883e926b1adb57007c0.stex" ]
+source_file="res://Components/Dice/d6_06.png"
+dest_files=[ "res://.import/d6_06.png-27c1623da84bf8ddf35700ab8059f9ae.stex" ]
 
 [params]
 

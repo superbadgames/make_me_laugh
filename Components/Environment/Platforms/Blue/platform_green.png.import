@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/character_1_landing01.png-bee6d5bbd33c101a2e6fc108d8485de6.stex"
+path="res://.import/platform_green.png-badb6a68ff15d6e3d4051c08203148fb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entities/PlayerCharacters/1_First/character_1_landing01.png"
-dest_files=[ "res://.import/character_1_landing01.png-bee6d5bbd33c101a2e6fc108d8485de6.stex" ]
+source_file="res://Components/Environment/Platforms/Blue/platform_green.png"
+dest_files=[ "res://.import/platform_green.png-badb6a68ff15d6e3d4051c08203148fb.stex" ]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=0
+flags/repeat=1
 flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false

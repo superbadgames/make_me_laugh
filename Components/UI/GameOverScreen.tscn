@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Components/UI/GameOverScreen.gd" type="Script" id=1]
+
+[node name="GameOverScreen" type="Popup"]
+margin_left = 95.7075
+margin_top = 32.1086
+margin_right = 247.707
+margin_bottom = 146.109
+script = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Game Over!"
+
+[node name="PlayAgainButton" type="Button" parent="."]
+margin_left = 6.78583
+margin_top = 29.8373
+margin_right = 83.7858
+margin_bottom = 49.8373
+text = "Keep Playing"
+
+[node name="QuitButton" type="Button" parent="."]
+margin_left = 29.6087
+margin_top = 59.1347
+margin_right = 69.6087
+margin_bottom = 79.1347
+text = "Quit"
+
+[connection signal="pressed" from="PlayAgainButton" to="." method="_on_PlayAgainButton_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_QuitButton_pressed"]

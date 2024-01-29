@@ -1,8 +1,8 @@
 extends KinematicBody2D
 
 const UP : Vector2 = Vector2.UP
-const GRAVITY : float = 300.0
-const JUMP_GRAVITY : float = 100.0
+const GRAVITY : float = 200.0
+const JUMP_GRAVITY : float = 50.0
 const TERMINAL_VELOCITY : float = 1_000.0
 const FAIL_PLANE : float = 1_000.0
 # Max speed the velocity can reach from acceleration
@@ -32,6 +32,7 @@ onready var respawn_timer = $RespawnTimer
 onready var collision_shape = $CollisionShape2D
 onready var my_camera = $Camera2D
 
+var win : bool = false
 var my_turn : bool = false
 var player_string
 var alive: bool = true
@@ -63,6 +64,8 @@ func _ready():
 	collision_shape.disabled = true
 
 func _process(delta):
+	if win:
+		animatedSprite.play("win")
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().change_scene("res://Boards/StartScreen/StartScreen.tscn")
 
@@ -76,7 +79,6 @@ func _physics_process(delta):
 				if d6 == null:
 					print("you've got problems bro")
 				else:
-					print("Rolling! ")
 					num_jumps = d6.roll()
 					rolled_this_turn = true
 		else:
@@ -141,7 +143,6 @@ func move():
 				# just the idle state needs to be set in the end_turn function. 
 				# This is working for now. 
 				if num_jumps <= 0 and rolled_this_turn:
-					print("My turn is over")
 					my_turn = false
 					rolled_this_turn = false
 		elif in_air:
@@ -166,7 +167,7 @@ func jump():
 		move_velocity.y -= jump_accel
 		if move_velocity.y <= -jump_max_speed:
 			jumping = false
-	elif Input.is_action_just_released("p1_jump"):
+	elif Input.is_action_just_released(player_string + "jump"):
 		jumping = false
 
 
@@ -199,7 +200,6 @@ func _on_RespawnTimer_timeout():
 
 
 func start_turn(di):
-	print("I got my turn, and I can roll a die now")
 	d6 = di
 	d6.toss()
 	my_turn = true
@@ -222,23 +222,27 @@ func is_my_turn():
 
 
 func restore_position():
-	print("restore to ", restore_position)
 	position = restore_position
 	alive = true
 
 func AddScore(points : int):
 	total_score += points
-	print("I got a point! My score is ", total_score)
 
 
 func MinusScore(points : int):
 	total_score -= points
-	print("I lost a point! My score is ", total_score)
 
 
 func get_score():
 	return total_score
 
 
+func has_won():
+	return win
+
+
 func goal():
-	print("You won a goal!")
+	total_score += 1000
+	animatedSprite.play("win")
+	win = true
+	set_physics_process(false)
